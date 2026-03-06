@@ -107,7 +107,7 @@ Theme is toggled from the sidebar or top bar and persisted across all pages via 
 
 ## 🌐 Deployment
 
-Deployed on Vercel: [YOUR_VERCEL_LINK_HERE]
+Deployed on Vercel: (https://slooze-inventory-seven.vercel.app/)
 
 ---
 
