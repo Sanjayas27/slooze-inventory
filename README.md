@@ -1,36 +1,130 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Slooze Inventory Management
 
-## Getting Started
+A role-based inventory management platform built with Next.js, featuring a Manager dashboard, product CRUD, and dark/light mode.
 
-First, run the development server:
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js v18 or higher
+- npm or yarn
+
+### Installation
 
 ```bash
+# 1. Clone the repository
+git clone https://github.com/YOUR_USERNAME/slooze-inventory.git
+
+# 2. Navigate into the project
+cd slooze-inventory
+
+# 3. Install dependencies
+npm install
+
+# 4. Start the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔐 Demo Accounts
 
-## Learn More
+| Role         | Email              | Password |
+| ------------ | ------------------ | -------- |
+| Manager      | manager@slooze.com | password |
+| Store Keeper | store@slooze.com   | password |
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📋 Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### A) Login
 
-## Deploy on Vercel
+- Email & password authentication with validation
+- Role-based routing on login
+- Dark / light mode toggle (persisted)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### B) Dashboard _(Manager only)_
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- KPI cards: Total Products, Stock Units, Low Stock Alerts, Inventory Value
+- Category breakdown with proportional bar charts
+- Stock overview chart (sortable by stock / value / name)
+- Full products table with category filter and search
+- Key insights: Top category, highest value item, critical low stock
+
+### C) Products _(Manager + Store Keeper)_
+
+- View all products with search and category filter chips
+- Sortable columns (Name / Price / Stock)
+- Low stock alert banner (items under 20 units)
+- Color-coded category tags and stock status badges
+
+### D) Add / Edit / Delete Products _(Manager only)_
+
+- Add new products via modal with validation
+- Edit existing products (pre-filled form)
+- Delete with confirmation dialog
+- All changes persist via localStorage and sync live to the Dashboard
+
+---
+
+## 👥 Role-Based Access
+
+| Feature        | Manager | Store Keeper |
+| -------------- | ------- | ------------ |
+| View Dashboard | ✅      | ❌           |
+| View Products  | ✅      | ✅           |
+| Add Product    | ✅      | ❌           |
+| Edit Product   | ✅      | ❌           |
+| Delete Product | ✅      | ❌           |
+
+- Sidebar nav items are filtered by role
+- Unauthorized routes redirect automatically
+- Restricted buttons are hidden per role
+
+---
+
+## 🌗 Dark / Light Mode
+
+Theme is toggled from the sidebar or top bar and persisted across all pages via `localStorage` (`slooze-theme` key).
+
+---
+
+## 🛠 Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Styling**: Inline styles with CSS-in-JS (no Tailwind dependency)
+- **Fonts**: Syne + DM Sans (Google Fonts)
+- **State**: React Context API + localStorage
+- **Auth**: Mock auth via AuthContext (ready for real API swap)
+
+---
+
+## 🌐 Deployment
+
+Deployed on Vercel: [YOUR_VERCEL_LINK_HERE]
+
+---
+
+## 📂 Project Structure
+
+```
+src/
+├── app/
+│   ├── page.tsx                  # Home / Landing page
+│   ├── (auth)/login/page.tsx     # Login page
+│   └── (app)/
+│       ├── layout.tsx            # App shell with ProductsProvider
+│       ├── dashboard/page.tsx    # Manager dashboard
+│       └── products/page.tsx     # Products page
+├── components/
+│   └── AppLayout.tsx             # Sidebar + topbar layout
+└── context/
+    ├── AuthContext.tsx           # Auth state & mock login
+    └── ProductsContext.tsx       # Shared products store
+```
