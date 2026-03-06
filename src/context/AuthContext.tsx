@@ -6,7 +6,7 @@ import { mockUsers } from "@/lib/mockData";
 
 interface AuthContextType {
   user: User | null;
-  login: (email: string) => User | null;
+  login: (email: string, password: string) => User | null;
   logout: () => void;
   loading: boolean;
 }
@@ -18,21 +18,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-
+    const storedUser = localStorage.getItem("slooze-user");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
-
     setLoading(false);
   }, []);
 
-  const login = (email: string): User | null => {
-    const foundUser = mockUsers.find((u) => u.email === email);
+  const login = (email: string, password: string): User | null => {
+    // Find user by email AND password
+    const foundUser = mockUsers.find(
+      (u) => u.email === email && u.password === password
+    );
 
     if (foundUser) {
       setUser(foundUser);
-      localStorage.setItem("user", JSON.stringify(foundUser));
+      localStorage.setItem("slooze-user", JSON.stringify(foundUser));
       return foundUser;
     }
 
@@ -41,7 +42,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("user");
+    localStorage.removeItem("slooze-user");
   };
 
   return (
@@ -53,10 +54,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
 export function useAuth() {
   const context = useContext(AuthContext);
-
   if (!context) {
     throw new Error("useAuth must be used within AuthProvider");
   }
-
   return context;
 }
