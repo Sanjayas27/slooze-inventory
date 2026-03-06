@@ -3,10 +3,12 @@ import { Product, User } from "@/types";
 export const mockUsers: User[] = [
   {
     email: "manager@slooze.com",
+    password: "manager123",
     role: "MANAGER",
   },
   {
     email: "store@slooze.com",
+    password: "store123",
     role: "STORE_KEEPER",
   },
 ];
