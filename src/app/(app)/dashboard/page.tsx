@@ -299,7 +299,7 @@ export default function DashboardPage() {
         <div className="db-stats">
           {stats.map((s, i) => (
             <div className="db-stat" key={s.label} style={{ animationDelay: `${i * 60}ms` }}>
-              <div className="db-stat-glow" style={{ background: STAT_ACCENTS[i].gradient.split(",")[1]?.trim().replace(")", "").replace("#", "rgba(") + ",0.5)" ?? "#6c47ff", background: STAT_ACCENTS[i].glow }} />
+              <div className="db-stat-glow" style={{ background: STAT_ACCENTS[i].glow }} />
               <span className="db-stat-icon">{STAT_ACCENTS[i].icon}</span>
               <p className="db-stat-label">{s.label}</p>
               <p className="db-stat-value" style={{ color: i === 2 && Number(s.value) > 0 ? "#f87171" : i === 3 ? "#4ade80" : (dark ? "#fff" : "#111") }}>{s.value}</p>
