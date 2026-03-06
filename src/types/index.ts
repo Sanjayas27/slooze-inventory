@@ -2,6 +2,7 @@ export type Role = "MANAGER" | "STORE_KEEPER";
 
 export interface User {
   email: string;
+  password: string;
   role: Role;
 }
 

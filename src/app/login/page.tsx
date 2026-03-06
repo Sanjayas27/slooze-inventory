@@ -111,11 +111,11 @@ export default function LoginPage() {
     else if (loggedInUser.role === "STORE_KEEPER") router.push("/products");
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") handleLogin();
   };
 
-  const fillDemo = (type) => {
+  const fillDemo = (type: "manager" | "store") => {
     setEmail(type === "manager" ? "manager@slooze.com" : "store@slooze.com");
     setPassword(type === "manager" ? "manager123" : "store123");
     setError("");
